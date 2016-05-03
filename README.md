@@ -1,5 +1,7 @@
 # lita-alertlogic
 
+[![Build Status](https://api.travis-ci.org/alertlogic/lita-alertlogic.svg?branch=master)](https://travis-ci.org/alertlogic/lita-alertlogic)
+
 **lita-alertlogic** is a handler for [Lita](https://github.com/jimmycuadra/lita). It can be used to pull various data points about Alert Logic customers directly from Hipchat.
 
 ## Installation
