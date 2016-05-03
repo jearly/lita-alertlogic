@@ -52,11 +52,44 @@ XXXXX       | Alert Logic
 Lita.configure do |config|
   # Alert Logic API Settings
   config.handlers.alertlogic.customer_id = 'your-alertlogic-customer-id'
-  config.handlers.alertlogic.api_auth = "your-api-key-obtained-from-alert-logic:"
-  config.handlers.alertlogic.lm_api_url = "https://publicapi.alertlogic.net/api/lm/v1"
-  config.handlers.alertlogic.tm_api_url = "https://publicapi.alertlogic.net/api/tm/v1"
-  config.handlers.alertlogic.customer_api_url = "https://api.alertlogic.net/api/customer/v1"
-  config.handlers.alertlogic.monitoring_api_url = "https://api.alertlogic.net/api/monitoring/v1"
+  config.handlers.alertlogic.api_auth = 'your-api-key-obtained-from-alert-logic:'
+  config.handlers.alertlogic.lm_api_url = 'https://publicapi.alertlogic.net/api/lm/v1'
+  config.handlers.alertlogic.tm_api_url = 'https://publicapi.alertlogic.net/api/tm/v1'
+  config.handlers.alertlogic.customer_api_url = 'https://api.alertlogic.net/api/customer/v1'
+  config.handlers.alertlogic.monitoring_api_url = 'https://api.alertlogic.net/api/monitoring/v1'
+end
+```
+
+## Sample config with Hipchat plugin
+
+```
+Lita.configure do |config|
+  # Logging level
+  config.robot.log_level = :info
+  
+  # Hipchat adapter
+  config.robot.adapter = :hipchat
+  
+  # Bot name
+  config.robot.name = "Lita Bot"
+
+  # Bot admins Type: String or Array of Jabber ID(s)
+  config.robot.admins = ['some_jabber_id@chat.hipchat.com']
+  config.adapters.hipchat.jid = 'bots-hipchat-jabber-id@chat.hipchat.com'
+  config.adapters.hipchat.password = 'bots-password'
+
+  # Hipchat room(s) Type: String or Array
+  config.adapters.hipchat.rooms = :all
+  
+  # Debugging mode
+  #config.adapters.hipchat.debug = false
+
+  # Alert Logic Settings
+  config.handlers.alertlogic.customer_id = 'your-alertlogic-customer-id'
+  config.handlers.alertlogic.api_auth = 'your-api-key-obtained-from-alert-logic:'
+  config.handlers.alertlogic.lm_api_url = 'https://publicapi.alertlogic.net/api/lm/v1'
+  config.handlers.alertlogic.tm_api_url = 'https://publicapi.alertlogic.net/api/tm/v1'
+  config.handlers.alertlogic.customer_api_url = 'https://api.alertlogic.net/api/customer/v1'
 end
 ```
 
