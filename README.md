@@ -92,6 +92,8 @@ Lita.configure do |config|
   config.handlers.alertlogic.lm_api_url = 'https://publicapi.alertlogic.net/api/lm/v1'
   config.handlers.alertlogic.tm_api_url = 'https://publicapi.alertlogic.net/api/tm/v1'
   config.handlers.alertlogic.customer_api_url = 'https://api.alertlogic.net/api/customer/v1'
+  config.handlers.alertlogic.monitoring_api_url = 'https://api.alertlogic.net/api/monitoring/v1'
+  config.handlers.alertlogic.incident_api_url = 'https://api.alertlogic.net/api/incident'
 end
 ```
 
