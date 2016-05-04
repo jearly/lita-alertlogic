@@ -11,6 +11,9 @@ en:
         validation:
           customer_id: "Please supply a valid Customer ID for this request."
           uuid: "Please supply a valid UUID for this request."
+          incident_id: Please supply a valid Incident ID for this request.
+        response:
+          no_incidents: "No incidents found for Customer ID: %{customer}"
         help:
           customerinfo:
             syntax: lita alertlogic customerinfo <customer_id or customer_name>
@@ -26,8 +29,11 @@ en:
               syntax: lita alertlogic agent ip counts <customer_id>
               desc: Displays IP address counts per agent and number of agents with matching IP totals
           incidents:
-            syntax: lita alertlogic incidents <customer_id>
-            desc: Lists incidents for the current day
+            syntax: lita alertlogic incidents <customer_id> <number of days>
+            desc: Lists incidents for the past n days
+          incident_notes:
+              syntax: lita alertlogic incidents <customer_id> <incident_id>
+              desc: Lists incident notes for a specific incident
           lm:
             appliances:
               syntax: lita alertlogic lm appliances <customer_id>

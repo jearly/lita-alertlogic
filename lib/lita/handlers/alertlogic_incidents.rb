@@ -23,19 +23,39 @@ module Lita
       # Route definitions
       # Incidents list route
       route(
-        /a(?:lertlogic)? incidents( (.+))?/i,
+        /a(?:lertlogic)? incidents? (.+)? (.+)?/i,
         :incidents_list,
         help: {
           t('help.incidents.syntax') => t('help.incidents.desc')
         }
       )
 
+      # Incident notes route
+      route(
+      /a(?:lertlogic)? incidentnotes? (.+)? (.+)?/i,
+        :list_notes,
+        help: {
+          t('help.incident_notes.syntax') => t('help.incident_notes.desc')
+        }
+      )
+
       # Customer Info Definition
       def incidents_list(response)
-        customer = response.match_data[1]
-        return response.reply(t('validation.customer_id')) if customer.nil?
-        customer_id = process_customer_id(customer.strip)
-        response.reply get_incidents(customer_id)
+        customer_id = response.match_data[1]
+        days     = response.match_data[2]
+        return response.reply(t('validation.customer_id')) if customer_id.nil?
+        incidents = get_incidents(customer_id, days)
+        return response.reply(t('response.no_incidents', customer: customer_id)) if incidents.empty?
+        response.reply "/code #{JSON.pretty_generate(incidents)}"
+      end
+
+      def list_notes(response)
+        customer_id = response.match_data[1]
+        incident_id = response.match_data[2]
+        return response.reply(t('validation.customer_id')) if customer_id.nil?
+        return response.reply(t('validation.incident_id')) if incident_id.nil?
+        notes = JSON.pretty_generate(incidents_notes(customer_id, incident_id))
+        response.reply "/code #{notes}"
       end
     end
     Lita.register_handler(AlertlogicIncidents)

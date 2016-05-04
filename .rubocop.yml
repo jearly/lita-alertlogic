@@ -1,18 +1,9 @@
 AllCops:
-  Excludes:
+  Exclude:
     - lib/lita-alertlogic.rb
 
 LineLength:
   Max: 130
 
-MethodLength:
-  Max: 25
-
 ModuleLength:
   Max: 150
-
-ClassLength:
-  Max: 225
-
-Metrics/AbcSize:
-  Max: 25

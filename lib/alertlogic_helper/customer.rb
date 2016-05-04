@@ -14,10 +14,7 @@ module AlertlogicHelper
     end
 
     def get_customer_ids(parent)
-      params = {
-        customer_id: parent,
-        type: 'customer'
-      }
+      params = api_params(parent, 'customer')
       resp = api_call(params)
       cids = []
       return t('error.customer_not_found') if parse_json(resp)['error']
@@ -37,7 +34,7 @@ module AlertlogicHelper
     end
 
     def process_customer_id(customer)
-      if /\A[-+]?\d+\z/ === customer
+      if /\A[-+]?\d+\z/ =~ customer
         return customer.to_i
       else
         return find_cid_by_name(customer)
@@ -45,34 +42,47 @@ module AlertlogicHelper
     end
 
     def valid_cid(customer_id)
-      customer_id.to_i if /\A[-+]?\d+\z/ === customer_id.strip
+      customer_id.to_i if /\A[-+]?\d+\z/ =~ customer_id.strip
     end
 
     def process_customers(customer_list)
       reply_text = '/code '
       headers = ['Customer ID', 'Customer Name']
-      data = []
-      if customer_list.is_a? Array
-        customer_list.each do |customer|
-          cust = parse_json(customer)
-          data << [
-            "#{cust['customer_id']}",
-            cust['customer_name'].strip
-          ]
-        end
-        reply_text << build_table(data, headers)
+      if customer_array?(customer_list)
+        customers = parse_customer_list(customer_list)
+        reply_text << build_table(customers, headers)
       else
-        if parse_json(customer_list)['error']
-          return t('error.customer_not_found')
-        end
-        parse_json(customer_list)['child_chain'].each do |customer|
-          data << [
-            "#{customer['customer_id']}",
-            customer['customer_name'].strip
-          ]
-        end
-        reply_text << build_table(data, headers)
+        return t('error.customer_not_found') if parse_json(customer_list)['error']
+        customers = parse_child_chain(customer_list)
+        reply_text << build_table(customers, headers)
       end
+    end
+
+    def customer_array?(customer_list)
+      customer_list.is_a? Array
+    end
+
+    def parse_customer_list(customer_list)
+      data = []
+      customer_list.each do |customer|
+        cust = parse_json(customer)
+        data << [
+          "#{cust['customer_id']}",
+          cust['customer_name']
+        ]
+      end
+      data
+    end
+
+    def parse_child_chain(customer_list)
+      data = []
+      parse_json(customer_list)['child_chain'].each do |customer|
+        data << [
+          "#{customer['customer_id']}",
+          customer['customer_name']
+        ]
+      end
+      data
     end
   end
 end

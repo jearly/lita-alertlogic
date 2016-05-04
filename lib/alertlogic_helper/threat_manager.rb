@@ -88,6 +88,7 @@ module AlertlogicHelper
     # rubocop:enable MethodLength
 
     # rubocop:disable Metrics/AbcSize
+    # rubocop:disable MethodLength
     def process_protectedhosts(customer_id, phosts)
       phost_list = phosts['protectedhosts']
       reply      = "/code Protectedhosts Status for customer: #{customer_id} \n"
@@ -115,6 +116,7 @@ module AlertlogicHelper
       reply << "\nTotal Protected Hosts: #{total}"
     end
     # rubocop:enable Metrics/AbcSize
+    # rubocop:enable MethodLength
 
     def search_phost_by_name(key, search_term, phosts)
       phosts['protectedhosts'].each do |phost|

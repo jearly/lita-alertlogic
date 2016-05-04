@@ -51,6 +51,7 @@ module AlertlogicHelper
     # rubocop:enable Metrics/AbcSize
 
     # rubocop:disable MethodLength
+    # rubocop:disable Metrics/AbcSize
     def process_lm_sources(customer_id, sources)
       headers      = [
         'Source Name',
@@ -83,16 +84,17 @@ module AlertlogicHelper
       summary = "\nTotal Sources: #{sources['total_count']}"
       if tables.length > 0
         reply = [reply_head, tables, summary]
-        return reply
       else
         reply = reply_head
         reply << build_table(data, headers)
         reply << summary
-        return reply
       end
+      reply
     end
     # rubocop:enable MethodLength
+    # rubocop:enable Metrics/AbcSize
 
+    # rubocop:disable MethodLength
     def process_lm_policies(customer_id, policies)
       headers     = [
         'Policy Type',
@@ -117,5 +119,6 @@ module AlertlogicHelper
       reply << "\nTotal Policies: #{policies['total_count']}"
       reply
     end
+    # rubocop:enable MethodLength
   end
 end

@@ -29,5 +29,13 @@ module AlertlogicHelper
     def valid_uuid?(string)
       UUID.validate(string)
     end
+
+    def api_params(cid, type, source = nil)
+      {
+        customer_id: cid,
+        type: type,
+        source: source
+      }
+    end
   end
 end

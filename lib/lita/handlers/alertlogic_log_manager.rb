@@ -74,11 +74,7 @@ module Lita
         response.reply(t('warn.standby'))
 
         customers.each do |cid|
-          params = {
-            customer_id: cid,
-            type:        'lm',
-            source:      'appliances'
-          }
+          params = api_params(cid, 'lm', 'appliances')
           resp = api_call(params)
           appliance_list << process_appliances(resp, cid)
         end
@@ -93,13 +89,7 @@ module Lita
         return response.reply(t('validation.customer_id')) if customer_id.nil?
         return response.reply(t('validation.uuid')) if uuid.nil?
 
-        url_params  = {
-          customer_id: customer_id,
-          api_type:    'lm',
-          source_type: 'appliances'
-        }
-
-        url    = construct_api_url(url_params)
+        url    = construct_api_url(customer_id, 'lm', 'appliances')
         url    = "#{url}/#{uuid}"
         params = {
           customer_id: customer_id,
@@ -120,12 +110,7 @@ module Lita
         customer_id = valid_cid(response.match_data[1])
         return response.reply(t('validation.customer_id')) if customer_id.nil?
         response.reply(t('warn.standby'))
-
-        params = {
-          customer_id: customer_id,
-          type:        'lm',
-          source:      'hosts'
-        }
+        params = api_params(customer_id, 'lm', 'hosts')
         resp = parse_json(
           api_call(params)
         )
@@ -150,11 +135,7 @@ module Lita
         return response.reply(t('validation.customer_id')) if customer_id.nil?
         response.reply(t('warn.standby'))
 
-        params = {
-          customer_id: customer_id,
-          type:        'lm',
-          source:      'policies'
-        }
+        params = api_params(customer_id, 'lm', 'policies')
         resp = parse_json(
           api_call(params)
         )
@@ -168,11 +149,7 @@ module Lita
         return response.reply(t('validation.customer_id')) if customer_id.nil?
         response.reply(t('warn.standby'))
 
-        params = {
-          customer_id: customer_id,
-          type:        'lm',
-          source:      'sources'
-        }
+        params = api_params(customer_id, 'lm', 'sources')
         resp = parse_json(
           api_call(params)
         )
