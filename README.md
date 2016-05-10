@@ -1,6 +1,10 @@
 # lita-alertlogic
 
 [![Build Status](https://api.travis-ci.org/alertlogic/lita-alertlogic.svg?branch=master)](https://travis-ci.org/alertlogic/lita-alertlogic)
+[![MIT License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://tldrlegal.com/license/mit-license)
+[![RubyGems :: RMuh Gem Version](http://img.shields.io/gem/v/lita-alertlogic.svg)](https://rubygems.org/gems/lita-alertlogic)
+[![Code Climate](https://img.shields.io/codeclimate/github/alertlogic/lita-alertlogic.svg)](https://codeclimate.com/github/alertlogic/lita-alertlogic)
+
 
 **lita-alertlogic** is a handler for [Lita](https://github.com/jimmycuadra/lita). It can be used to pull various data points about Alert Logic customers directly from Hipchat.
 
